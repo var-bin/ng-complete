@@ -1,3 +1,26 @@
+<form action="#">
+  <label for="serverName">
+    Server name:
+    <!-- <input type="text" id="serverName"
+      (input)="onUpdateServerName($event)"> -->
+    <input type="text" id="serverName"
+      [(ngModel)]="serverName" name="serverName">
+  </label>
+
+  <p *ngIf="serverName">
+    <strong>{{serverName}}</strong>
+  </p>
+</form>
+
+<button type="button"
+  class="btn btn-primary"
+  [disabled]="!allowToAdd"
+  (click)="onCreateServer()">
+  Add new server
+</button>
 <p>
-  server works!
+  {{serverCreationStatus}}
+</p>
+<p>
+  Server with ID {{ serverId }} is {{ serverStatus }}
 </p>
