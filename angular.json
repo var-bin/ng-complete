@@ -10,7 +10,7 @@
       "prefix": "app",
       "schematics": {
         "@schematics/angular:component": {
-          "styleext": "less"
+          "styleext": "scss"
         }
       },
       "architect": {
@@ -27,7 +27,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.less"
+              "src/styles.scss"
             ],
             "scripts": []
           },
@@ -95,7 +95,7 @@
             "tsConfig": "src/tsconfig.spec.json",
             "karmaConfig": "src/karma.conf.js",
             "styles": [
-              "src/styles.less"
+              "src/styles.scss"
             ],
             "scripts": [],
             "assets": [
@@ -147,5 +147,10 @@
       }
     }
   },
-  "defaultProject": "ng-complete"
+  "defaultProject": "ng-complete",
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "scss"
+    }
+  }
 }
