@@ -6,11 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./server.component.scss']
 })
 export class ServerComponent implements OnInit {
-  serverId = 10;
-  serverStatus = 'offline';
   allowToAdd = true;
   serverCreationStatus = 'No server was created!';
-  serverName = 'Test server name';
+  serverName = '';
 
   constructor() { }
 

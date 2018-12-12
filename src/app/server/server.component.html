@@ -7,9 +7,15 @@
       [(ngModel)]="serverName" name="serverName">
   </label>
 
-  <p *ngIf="serverName">
+  <p *ngIf="serverName; else noServer">
     <strong>{{serverName}}</strong>
   </p>
+
+  <ng-template #noServer>
+    <p>
+      No Server Name!
+    </p>
+  </ng-template>
 </form>
 
 <button type="button"
@@ -21,6 +27,6 @@
 <p>
   {{serverCreationStatus}}
 </p>
-<p>
-  Server with ID {{ serverId }} is {{ serverStatus }}
-</p>
+
+<app-server-status></app-server-status>
+<app-server-status></app-server-status>
