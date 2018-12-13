@@ -6,10 +6,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./shopping-edit.component.scss']
 })
 export class ShoppingEditComponent implements OnInit {
+  isEditMode = false;
 
   constructor() { }
 
   ngOnInit() {
   }
 
+  onEditMode() {
+    this.isEditMode = true;
+  }
+
+  onCancelEditMode() {
+    this.isEditMode = false;
+  }
 }
