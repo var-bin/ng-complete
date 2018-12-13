@@ -1,3 +1,41 @@
-<p>
-  shopping-edit works!
-</p>
+<div class="btn-toolbar d-flex justify-content-end"
+  role="toolbar"
+  aria-label="Toolbar Shopping List">
+  <div class="btn-group"
+    role="group"
+    aria-label="Shopping List Button Group"
+    *ngIf="!isEditMode; else editMode">
+    <button type="button"
+      class="btn btn-secondary"
+      (click)="onEditMode()">
+      Edit
+    </button>
+    <button type="button"
+      class="btn btn-secondary">
+      Delete
+    </button>
+    <button type="button"
+      class="btn btn-secondary">
+      Copy
+    </button>
+  </div>
+  <ng-template #editMode>
+    <div class="btn-group"
+    role="group"
+    aria-label="Shopping List Button Group">
+      <button type="button"
+        class="btn btn-secondary">
+        Save
+      </button>
+      <button type="button"
+        class="btn btn-secondary"
+        (click)="onCancelEditMode()">
+        Cancel
+      </button>
+    </div>
+  </ng-template>
+</div>
+
+
+
+<hr>
