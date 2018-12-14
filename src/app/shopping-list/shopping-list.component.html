@@ -5,13 +5,8 @@
     <ul class="list-group">
       <li class="list-group-item"
         *ngFor="let ingredient of ingredients">
-        <div class="d-flex flex-column">
-          <app-shopping-edit></app-shopping-edit>
-        </div>
-        <div class="d-flex justify-content-between align-items-center">
-          {{ ingredient.name }}
-          <span class="badge badge-primary badge-pill">{{ ingredient.amount }}</span>
-        </div>
+        <app-shopping-list-item
+          [ingredient]="ingredient"></app-shopping-list-item>
       </li>
     </ul>
   </div>

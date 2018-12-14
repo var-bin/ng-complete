@@ -1,0 +1,41 @@
+<div class="d-flex flex-column">
+  <app-shopping-edit
+    (editMode)="onEditMode($event)"></app-shopping-edit>
+</div>
+
+<!-- Static view -->
+<div class="d-flex justify-content-between align-items-center"
+  *ngIf="!isEditMode; else editModeForm">
+  {{ ingredient.name }}
+  <span class="badge badge-primary badge-pill">
+    {{ ingredient.amount }}
+  </span>
+</div>
+
+<ng-template #editModeForm>
+  <!-- Edit view -->
+  <form class="form-inline"
+    [formGroup]="shoppingListForm"
+    (ngSubmit)="onSubmit()">
+    <label class="sr-only" for="itemName">Item name</label>
+    <input type="text"
+      class="form-control mb-2 mr-sm-2"
+      id="itemName"
+      placeholder="Item name"
+      formControlName="itemName">
+
+    <label class="sr-only" for="itemCount">Item count</label>
+    <input type="number"
+      class="form-control mb-2 mr-sm-2"
+      id="itemCount"
+      placeholder="Item count"
+      formControlName="itemCount"
+      min="1">
+
+    <button type="submit"
+      class="btn btn-primary mb-2"
+      [disabled]="!shoppingListForm.valid">
+      Save
+    </button>
+  </form>
+</ng-template>
