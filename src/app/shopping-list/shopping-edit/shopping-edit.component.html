@@ -3,39 +3,33 @@
   aria-label="Toolbar Shopping List">
   <div class="btn-group"
     role="group"
-    aria-label="Shopping List Button Group"
-    *ngIf="!isEditMode; else editMode">
+    aria-label="Shopping List Button Group">
     <button type="button"
       class="btn btn-secondary"
-      (click)="onEditMode()">
+      (click)="onEditMode()"
+      *ngIf="!isEditMode; else editMode">
       Edit
     </button>
-    <button type="button"
-      class="btn btn-secondary">
-      Delete
-    </button>
-    <button type="button"
-      class="btn btn-secondary">
-      Copy
-    </button>
-  </div>
-  <ng-template #editMode>
-    <div class="btn-group"
-    role="group"
-    aria-label="Shopping List Button Group">
-      <button type="button"
-        class="btn btn-secondary">
-        Save
-      </button>
+    <ng-template #editMode>
       <button type="button"
         class="btn btn-secondary"
         (click)="onCancelEditMode()">
         Cancel
       </button>
-    </div>
-  </ng-template>
+    </ng-template>
+    <button type="button"
+      class="btn btn-secondary"
+      (click)="onDelete()"
+      [disabled]="isEditMode">
+      Delete
+    </button>
+    <button type="button"
+      class="btn btn-secondary"
+      (click)="onCopy()"
+      [disabled]="isEditMode">
+      Copy
+    </button>
+  </div>
 </div>
-
-
 
 <hr>
