@@ -14,28 +14,34 @@
 
 <ng-template #editModeForm>
   <!-- Edit view -->
-  <form class="form-inline"
+  <form
     [formGroup]="shoppingListForm"
     (ngSubmit)="onSubmit()">
-    <label class="sr-only" for="itemName">Item name</label>
-    <input type="text"
-      class="form-control mb-2 mr-sm-2"
-      id="itemName"
-      placeholder="Item name"
-      formControlName="itemName">
-
-    <label class="sr-only" for="itemCount">Item count</label>
-    <input type="number"
-      class="form-control mb-2 mr-sm-2"
-      id="itemCount"
-      placeholder="Item count"
-      formControlName="itemCount"
-      min="1">
-
-    <button type="submit"
-      class="btn btn-primary mb-2"
-      [disabled]="!shoppingListForm.valid">
-      Save
-    </button>
+    <div class="row">
+      <div class="col-sm-5 mb-2">
+        <label class="sr-only" for="itemName">Item name</label>
+        <input type="text"
+          class="form-control"
+          id="itemName"
+          placeholder="Item name"
+          formControlName="itemName">
+      </div>
+      <div class="col-sm-5 mb-2">
+        <label class="sr-only" for="itemCount">Item count</label>
+        <input type="number"
+          class="form-control"
+          id="itemCount"
+          placeholder="Item count"
+          formControlName="itemCount"
+          min="1">
+      </div>
+      <div class="col-sm-2">
+        <button type="submit"
+          class="btn btn-primary"
+          [disabled]="!shoppingListForm.valid">
+          Save
+        </button>
+      </div>
+    </div>
   </form>
 </ng-template>
