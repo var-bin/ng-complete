@@ -1,18 +1,22 @@
-<app-header></app-header>
+<app-header
+  (recipeBookMode)="onRecipeBookMode($event)"></app-header>
 
 <main class="container-fluid">
-  <article class="row">
+  <article class="row"
+    *ngIf="isRecipeBookMode; else showShoppingList">
     <section class="col">
       <h2>Recipe Book</h2>
 
       <app-recipes></app-recipes>
     </section>
   </article>
-  <article class="row">
-    <section class="col">
-      <h2>Shopping List</h2>
+  <ng-template #showShoppingList>
+    <article class="row">
+      <section class="col">
+        <h2>Shopping List</h2>
 
-      <app-shopping-list></app-shopping-list>
-    </section>
-  </article>
+        <app-shopping-list></app-shopping-list>
+      </section>
+    </article>
+  </ng-template>
 </main>
