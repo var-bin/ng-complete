@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { Ingredient } from "../shared/models";
 
@@ -12,9 +13,28 @@ export class ShoppingListComponent implements OnInit {
     new Ingredient('Apples', 5),
     new Ingredient('Tomatoes', 10)
   ];
+  addNewItemForm: FormGroup;
 
   constructor() { }
 
   ngOnInit() {
+    this.addNewItemForm = new FormGroup({
+      itemName: new FormControl('', [
+        Validators.required,
+        Validators.minLength(3)
+      ]),
+      itemCount: new FormControl('', [
+        Validators.required,
+        Validators.min(1)
+      ])
+    });
+  }
+
+  onSubmit() {
+    const {itemName, itemCount} = this.addNewItemForm.value;
+
+    this.ingredients.push(
+      new Ingredient(itemName, itemCount)
+    );
   }
 }

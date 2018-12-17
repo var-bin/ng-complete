@@ -2,6 +2,37 @@
   <div class="col-12">
     <hr>
 
+    <form
+      [formGroup]="addNewItemForm"
+      (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="col-sm-7">
+          <label class="sr-only" for="addNewItemName">Name</label>
+          <input type="text"
+            class="form-control mb-2"
+            id="addNewItemName"
+            placeholder="Item name"
+            formControlName="itemName">
+        </div>
+        <div class="col-sm-3">
+          <label class="sr-only" for="addNewItemCount">Amount</label>
+          <input type="number"
+            class="form-control mb-2"
+            id="addNewItemCount"
+            placeholder="Item count"
+            formControlName="itemCount"
+            min="1">
+        </div>
+        <div class="col-sm-2">
+          <button type="submit"
+            class="btn btn-primary mb-2"
+            [disabled]="!addNewItemForm.valid">
+            Add
+          </button>
+        </div>
+      </div>
+    </form>
+
     <ul class="list-group">
       <li class="list-group-item"
         *ngFor="let ingredient of ingredients">
