@@ -12,4 +12,15 @@ export class RecipeDetailComponent implements OnInit {
   ngOnInit() {
   }
 
+  onToShoppingList() {
+    console.log('onToShoppingList works');
+  }
+
+  onEditRecipe() {
+    console.log('onEditRecipe works');
+  }
+
+  onDeleteRecipe() {
+    console.log('onDeleteRecipe works');
+  }
 }

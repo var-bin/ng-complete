@@ -9,13 +9,19 @@
   </button>
   <div class="dropdown-menu"
     aria-labelledby="dropdownMenu2">
-    <button class="dropdown-item" type="button">
+    <button class="dropdown-item"
+      type="button"
+      (click)="onToShoppingList()">
       To Shopping List
     </button>
-    <button class="dropdown-item" type="button">
+    <button class="dropdown-item"
+      type="button"
+      (click)="onEditRecipe()">
       Edit Recipe
     </button>
-    <button class="dropdown-item" type="button">
+    <button class="dropdown-item"
+      type="button"
+      (click)="onDeleteRecipe()">
       Delete Recipe
     </button>
   </div>
