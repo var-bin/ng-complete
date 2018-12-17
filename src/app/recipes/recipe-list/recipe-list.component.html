@@ -12,33 +12,7 @@
   </div>
 
   <div class="col" *ngFor="let recipe of recipes">
-    <div class="row">
-      <div class="col-sm-12">
-        <div class="card mb-3">
-          <header class="card-header">
-            <div class="row">
-              <div class="col">
-                <h4>{{recipe.name}}</h4>
-              </div>
-              <div class="col">
-                <app-recipe-detail></app-recipe-detail>
-              </div>
-            </div>
-          </header>
-          <a href="#">
-            <img class="card-img-top"
-              [src]="recipe.imagePath"
-              alt="{{recipe.name}}">
-            <div class="card-body">
-              <p class="card-text">
-                {{recipe.description}}
-              </p>
-            </div>
-          </a>
-        </div>
-      </div>
-    </div>
+    <app-recipe-item
+      [recipe]="recipe"></app-recipe-item>
   </div>
 </div>
-
-<app-recipe-item></app-recipe-item>
