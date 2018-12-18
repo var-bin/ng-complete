@@ -5,7 +5,7 @@
   <article class="row"
     *ngIf="isRecipeBookMode; else showShoppingList">
     <section class="col">
-      <h2>Recipe Book</h2>
+      <h2 appBetterHighlight>Recipe Book</h2>
 
       <app-recipes></app-recipes>
     </section>
@@ -13,7 +13,7 @@
   <ng-template #showShoppingList>
     <article class="row">
       <section class="col">
-        <h2>Shopping List</h2>
+        <h2 appBetterHighlight>Shopping List</h2>
 
         <app-shopping-list></app-shopping-list>
       </section>
