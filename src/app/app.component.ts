@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'Ng Complete';
+  isRecipeBookMode: boolean = true;
+
+  onRecipeBookMode(isRecipeBookMode: boolean) {
+    this.isRecipeBookMode = isRecipeBookMode;
+  }
 }
