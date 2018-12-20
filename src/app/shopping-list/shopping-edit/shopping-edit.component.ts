@@ -1,4 +1,6 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+
+import { ShoppingListService } from '../shopping-list.service';
 
 @Component({
   selector: 'app-shopping-edit',
@@ -8,9 +10,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 export class ShoppingEditComponent implements OnInit {
   isEditMode: boolean = false;
 
-  @Output() editMode = new EventEmitter<boolean>();
-
-  constructor() { }
+  constructor(private shoppingListService: ShoppingListService) { }
 
   ngOnInit() {
   }
@@ -18,13 +18,13 @@ export class ShoppingEditComponent implements OnInit {
   onEditMode() {
     this.isEditMode = true;
 
-    this.editMode.emit(this.isEditMode);
+    this.shoppingListService.editModeEmit(this.isEditMode);
   }
 
   onCancelEditMode() {
     this.isEditMode = false;
 
-    this.editMode.emit(this.isEditMode);
+    this.shoppingListService.editModeEmit(this.isEditMode);
   }
 
   onDelete() {

@@ -2,11 +2,13 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { Ingredient } from '../../shared/models';
+import { ShoppingListService } from '../shopping-list.service';
 
 @Component({
   selector: 'app-shopping-list-item',
   templateUrl: './shopping-list-item.component.html',
-  styleUrls: ['./shopping-list-item.component.scss']
+  styleUrls: ['./shopping-list-item.component.scss'],
+  providers: [ShoppingListService]
 })
 export class ShoppingListItemComponent implements OnInit {
   @Input() ingredient: Ingredient;
@@ -14,7 +16,7 @@ export class ShoppingListItemComponent implements OnInit {
   isEditMode: boolean = false;
   shoppingListForm: FormGroup;
 
-  constructor() { }
+  constructor(private shoppingListService: ShoppingListService) { }
 
   ngOnInit() {
     this.shoppingListForm = new FormGroup({
@@ -27,10 +29,9 @@ export class ShoppingListItemComponent implements OnInit {
         Validators.min(1)
       ])
     });
-  }
 
-  onEditMode(isEditMode: boolean) {
-    this.isEditMode = isEditMode;
+    this.shoppingListService.editModeSubscribe()
+      .subscribe((isEditMode: boolean) => this.isEditMode = isEditMode);
   }
 
   onSubmit() {
