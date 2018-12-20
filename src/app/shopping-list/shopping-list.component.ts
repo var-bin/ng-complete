@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
-import { Ingredient } from "../shared/models";
+import { Ingredient } from '../shared/models';
+
+import { ShoppingListService } from './shopping-list.service';
 
 @Component({
   selector: 'app-shopping-list',
   templateUrl: './shopping-list.component.html',
-  styleUrls: ['./shopping-list.component.scss']
+  styleUrls: ['./shopping-list.component.scss'],
+  providers: [ShoppingListService]
 })
 export class ShoppingListComponent implements OnInit {
   ingredients: Ingredient[] = [
