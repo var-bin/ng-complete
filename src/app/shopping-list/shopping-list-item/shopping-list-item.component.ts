@@ -30,8 +30,6 @@ export class ShoppingListItemComponent implements OnInit {
   }
 
   onEditMode(isEditMode: boolean) {
-    console.log('onEditMode: ', isEditMode);
-
     this.isEditMode = isEditMode;
   }
 
