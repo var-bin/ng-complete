@@ -1,26 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { Ingredient } from '../shared/models';
 
 import { ShoppingListService } from './shopping-list.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-shopping-list',
   templateUrl: './shopping-list.component.html',
-  styleUrls: ['./shopping-list.component.scss'],
-  providers: [ShoppingListService]
+  styleUrls: ['./shopping-list.component.scss']
 })
-export class ShoppingListComponent implements OnInit {
-  ingredients: Ingredient[] = [
-    new Ingredient('Apples', 5),
-    new Ingredient('Tomatoes', 10)
-  ];
+export class ShoppingListComponent implements OnInit, OnDestroy {
+  ingredients: Ingredient[];
   addNewItemForm: FormGroup;
 
-  constructor() { }
+  private ingredientsSubscription: Subscription;
+
+  constructor(private shoppingListService: ShoppingListService) { }
 
   ngOnInit() {
+    this.ingredients = this.shoppingListService.getAllIngredients();
     this.addNewItemForm = new FormGroup({
       itemName: new FormControl('', [
         Validators.required,
@@ -31,13 +31,32 @@ export class ShoppingListComponent implements OnInit {
         Validators.min(1)
       ])
     });
+
+    this.ingredientsSubscription = this.shoppingListService.changedIngredients
+      .subscribe((ingredients: Ingredient[]) => {
+        this.ingredients = ingredients;
+      });
   }
 
-  onSubmit() {
-    const {itemName, itemCount} = this.addNewItemForm.value;
+  onSubmit(): void {
+    const { itemName, itemCount } = this.addNewItemForm.value;
 
-    this.ingredients.push(
-      new Ingredient(itemName, itemCount)
-    );
+    this.shoppingListService.addIngredient({
+      name: itemName,
+      amount: itemCount
+    });
+
+    this.clearForm();
+  }
+
+  clearForm(): void {
+    this.addNewItemForm.setValue({
+      itemName: '',
+      itemCount: ''
+    });
+  }
+
+  ngOnDestroy() {
+    this.ingredientsSubscription.unsubscribe();
   }
 }
