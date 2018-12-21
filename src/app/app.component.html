@@ -1,22 +1,9 @@
-<app-header
-  (recipeBookMode)="onRecipeBookMode($event)"></app-header>
+<app-header></app-header>
 
 <main class="container-fluid">
-  <article class="row"
-    *ngIf="isRecipeBookMode; else showShoppingList">
+  <article class="row">
     <section class="col">
-      <h2 appBetterHighlight>Recipe Book</h2>
-
-      <app-recipes></app-recipes>
+      <router-outlet></router-outlet>
     </section>
   </article>
-  <ng-template #showShoppingList>
-    <article class="row">
-      <section class="col">
-        <h2 appBetterHighlight>Shopping List</h2>
-
-        <app-shopping-list></app-shopping-list>
-      </section>
-    </article>
-  </ng-template>
 </main>
