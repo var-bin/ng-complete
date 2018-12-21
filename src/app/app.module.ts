@@ -14,6 +14,8 @@ import { ShoppingListItemComponent } from './shopping-list/shopping-list-item/sh
 import { BetterHighlightDirective } from './shared/directives/better-highlight.directive';
 
 import { ShoppingListService } from './shopping-list/shopping-list.service';
+import { AppRoutingModule } from './app-routing.module';
+import { PageNotFoundComponent } from './shared/components/page-not-found/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -26,12 +28,14 @@ import { ShoppingListService } from './shopping-list/shopping-list.service';
     ShoppingListComponent,
     ShoppingEditComponent,
     ShoppingListItemComponent,
-    BetterHighlightDirective
+    BetterHighlightDirective,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AppRoutingModule
   ],
   providers: [ShoppingListService],
   bootstrap: [AppComponent]
