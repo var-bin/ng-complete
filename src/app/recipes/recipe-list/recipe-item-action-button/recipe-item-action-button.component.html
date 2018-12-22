@@ -1,0 +1,28 @@
+<div class="dropdown text-right">
+  <button class="btn btn-secondary dropdown-toggle"
+    type="button"
+    id="dropdownMenu2"
+    data-toggle="dropdown"
+    aria-haspopup="true"
+    aria-expanded="false">
+    Action
+  </button>
+  <div class="dropdown-menu"
+    aria-labelledby="dropdownMenu2">
+    <button class="dropdown-item"
+      type="button"
+      (click)="onToShoppingList()">
+      To Shopping List
+    </button>
+    <button class="dropdown-item"
+      type="button"
+      (click)="onEditRecipe()">
+      Edit Recipe
+    </button>
+    <button class="dropdown-item"
+      type="button"
+      (click)="onDeleteRecipe()">
+      Delete Recipe
+    </button>
+  </div>
+</div>

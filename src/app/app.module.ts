@@ -16,6 +16,7 @@ import { BetterHighlightDirective } from './shared/directives/better-highlight.d
 import { ShoppingListService } from './shopping-list/shopping-list.service';
 import { AppRoutingModule } from './app-routing.module';
 import { PageNotFoundComponent } from './shared/components/page-not-found/page-not-found/page-not-found.component';
+import { RecipeItemActionButtonComponent } from './recipes/recipe-list/recipe-item-action-button/recipe-item-action-button.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { PageNotFoundComponent } from './shared/components/page-not-found/page-n
     ShoppingEditComponent,
     ShoppingListItemComponent,
     BetterHighlightDirective,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    RecipeItemActionButtonComponent
   ],
   imports: [
     BrowserModule,
