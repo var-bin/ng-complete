@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { Ingredient } from '../shared/models';
 
@@ -17,7 +18,10 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
 
   private ingredientsSubscription: Subscription;
 
-  constructor(private shoppingListService: ShoppingListService) { }
+  constructor(
+    private shoppingListService: ShoppingListService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
     this.ingredients = this.shoppingListService.getAllIngredients();
@@ -58,5 +62,11 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.ingredientsSubscription.unsubscribe();
+  }
+
+  onGoToHome() {
+    console.log('onGoToHome works');
+
+    this.router.navigate(['/']);
   }
 }
