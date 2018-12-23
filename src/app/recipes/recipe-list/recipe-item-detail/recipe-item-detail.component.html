@@ -1,28 +1,30 @@
-<div class="dropdown text-right">
-  <button class="btn btn-secondary dropdown-toggle"
-    type="button"
-    id="dropdownMenu2"
-    data-toggle="dropdown"
-    aria-haspopup="true"
-    aria-expanded="false">
-    Action
-  </button>
-  <div class="dropdown-menu"
-    aria-labelledby="dropdownMenu2">
-    <button class="dropdown-item"
-      type="button"
-      (click)="onToShoppingList()">
-      To Shopping List
-    </button>
-    <button class="dropdown-item"
-      type="button"
-      (click)="onEditRecipe()">
-      Edit Recipe
-    </button>
-    <button class="dropdown-item"
-      type="button"
-      (click)="onDeleteRecipe()">
-      Delete Recipe
-    </button>
-  </div>
+<div class="card mb-3">
+  <header class="card-header">
+    <div class="row">
+      <div class="col">
+        <h4>{{recipe.name}}</h4>
+      </div>
+    </div>
+  </header>
+    <img class="card-img-top"
+      [src]="recipe.imagePath"
+      alt="{{recipe.name}}">
+    <div class="card-body">
+      <p class="card-text">
+        {{recipe.description}}
+      </p>
+
+      <h4>
+        Ingredients:
+      </h4>
+      <ul class="list-group">
+        <li class="list-group-item d-flex justify-content-between align-items-center"
+          *ngFor="let ingredient of recipe.ingredients">
+          {{ ingredient.name }}
+          <span class="badge badge-primary badge-pill">
+            {{ ingredient.amount }}
+          </span>
+        </li>
+      </ul>
+    </div>
 </div>
