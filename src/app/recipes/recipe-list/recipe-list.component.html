@@ -13,8 +13,9 @@
     <hr>
   </div>
 
-  <div class="col" *ngFor="let recipe of recipes">
+  <div class="col" *ngFor="let recipe of recipes; let i=index">
     <app-recipe-item
-      [recipe]="recipe"></app-recipe-item>
+      [recipe]="recipe"
+      [recipeId]="i"></app-recipe-item>
   </div>
 </div>
