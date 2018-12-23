@@ -14,6 +14,7 @@ import { ShoppingListItemComponent } from './shopping-list/shopping-list-item/sh
 import { BetterHighlightDirective } from './shared/directives/better-highlight.directive';
 
 import { ShoppingListService } from './shopping-list/shopping-list.service';
+import { RecipeService } from './recipes/recipe.service';
 import { AppRoutingModule } from './app-routing.module';
 import { PageNotFoundComponent } from './shared/components/page-not-found/page-not-found/page-not-found.component';
 import { RecipeItemActionButtonComponent } from './recipes/recipe-list/recipe-item-action-button/recipe-item-action-button.component';
@@ -24,8 +25,8 @@ import { RecipeItemActionButtonComponent } from './recipes/recipe-list/recipe-it
     HeaderComponent,
     RecipesComponent,
     RecipeListComponent,
-    RecipeItemDetailComponent,
     RecipeItemComponent,
+    RecipeItemDetailComponent,
     ShoppingListComponent,
     ShoppingEditComponent,
     ShoppingListItemComponent,
@@ -39,7 +40,10 @@ import { RecipeItemActionButtonComponent } from './recipes/recipe-list/recipe-it
     ReactiveFormsModule,
     AppRoutingModule
   ],
-  providers: [ShoppingListService],
+  providers: [
+    ShoppingListService,
+    RecipeService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
