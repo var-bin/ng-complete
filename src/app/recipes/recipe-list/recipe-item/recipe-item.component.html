@@ -12,7 +12,7 @@
           </div>
         </div>
       </header>
-      <a href="#">
+      <a [routerLink]="['/recipe-book', getRecipeId()]">
         <img class="card-img-top"
           [src]="recipe.imagePath"
           alt="{{recipe.name}}">
