@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 
+import { map } from 'rxjs/operators';
+
 import { Recipe } from '../../recipe.model';
 import { RecipeService } from '../../recipe.service';
 
@@ -23,5 +25,27 @@ export class RecipeItemDetailComponent implements OnInit {
     const userId: number = +userUrl[userUrl.length - 1];
 
     this.recipe = this.recipeService.getRecipeById(userId - 1);
+
+    // Capture query params: `allowEdit`, `test` if available
+    let queryParams = {};
+
+    this.route
+      .queryParamMap
+      .pipe(
+        map(params => {
+          const keys = params.keys;
+
+          const queryParams = keys.map(key => {
+            return {[key]: params.get(key)};
+          });
+
+          return queryParams;
+        })
+      )
+      .subscribe((_queryParams) => {
+        queryParams = _queryParams;
+      });
+
+    console.log('allowEdit 2: ', queryParams);
   }
 }
