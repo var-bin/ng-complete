@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, NavigationExtras } from '@angular/router';
 
 import { Ingredient } from '../shared/models';
 
@@ -67,6 +67,11 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
   onGoToHome() {
     console.log('onGoToHome works');
 
-    this.router.navigate(['/']);
+    const navExtras: NavigationExtras = {
+      queryParams: {'session_id': 1},
+      fragment: 'myAwesomeId'
+    };
+
+    this.router.navigate(['/recipe-book'], navExtras);
   }
 }
