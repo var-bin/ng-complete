@@ -12,7 +12,9 @@
           </div>
         </div>
       </header>
-      <a [routerLink]="['/recipe-book', getRecipeId()]">
+      <a [routerLink]="['/recipe-book', getRecipeId()]"
+         [queryParams]="{allowEdit: '1', test: '1'}"
+         fragment="loading">
         <img class="card-img-top"
           [src]="recipe.imagePath"
           alt="{{recipe.name}}">
