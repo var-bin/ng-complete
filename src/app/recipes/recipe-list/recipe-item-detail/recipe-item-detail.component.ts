@@ -35,17 +35,13 @@ export class RecipeItemDetailComponent implements OnInit {
         map(params => {
           const keys = params.keys;
 
-          const queryParams = keys.map(key => {
-            return {[key]: params.get(key)};
+          return keys.map(key => {
+            return { [key]: params.get(key) };
           });
-
-          return queryParams;
         })
       )
       .subscribe((_queryParams) => {
         queryParams = _queryParams;
       });
-
-    console.log('allowEdit 2: ', queryParams);
   }
 }
