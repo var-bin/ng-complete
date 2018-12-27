@@ -39,9 +39,9 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
       ])
     });
 
-    this.ingredientsSubscription = this.shoppingListService.changedIngredients
-      .subscribe((ingredients: Ingredient[]) => {
-        this.ingredients = ingredients;
+    this.ingredientsSubscription = this.shoppingListService.changedShoppingLists
+      .subscribe((shoppingLists: ShoppingList[]) => {
+        this.shoppingLists = shoppingLists;
       });
   }
 

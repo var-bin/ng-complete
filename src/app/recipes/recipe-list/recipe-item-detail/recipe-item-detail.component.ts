@@ -39,8 +39,7 @@ export class RecipeItemDetailComponent implements OnInit {
             return { [key]: params.get(key) };
           });
         })
-      )
-      .subscribe((_queryParams) => {
+      ).subscribe((_queryParams) => {
         queryParams = _queryParams;
       });
   }

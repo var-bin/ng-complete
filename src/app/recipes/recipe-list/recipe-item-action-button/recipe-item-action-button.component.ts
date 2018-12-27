@@ -18,7 +18,7 @@ export class RecipeItemActionButtonComponent implements OnInit {
 
   onToShoppingList() {
     this.recipeService
-      .addIngredientsToShoppingList(this.recipe.ingredients);
+      .addIngredientsToShoppingList(this.recipe);
   }
 
   onEditRecipe() {
