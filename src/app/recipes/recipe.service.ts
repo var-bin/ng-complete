@@ -12,7 +12,7 @@ export class RecipeService {
       'Basic latkes',
       'A perfect base for all kinds of tasty toppings, or simply delicious with a dollop of fiery mustard or soured cream',
       // https://www.jamieoliver.com/recipes/potato-recipes/basic-latkes/
-      //'https://img.jamieoliver.com/jamieoliver/recipe-database/xtra_med/83536218.jpg'
+      // 'https://img.jamieoliver.com/jamieoliver/recipe-database/xtra_med/83536218.jpg'
       'https://dummyimage.com/288x160/ccc/fff',
       [
         new Ingredient('large Maris Piper potatoes', 2),
@@ -27,7 +27,7 @@ export class RecipeService {
       'Spanish tortilla',
       'This classic Spanish dish is very versatile and quick to whip up. The tortilla (or Spanish omelette) can be served hot or cold and is a fantastic way of using up all kinds of ingredients – simply add in any leftover vegetables, crumbled or grated cheese, jarred red peppers or cooked sausage. They’ll all taste great, so get experimenting!',
       // https://www.jamieoliver.com/recipes/eggs-recipes/spanish-tortilla/
-      //'https://img.jamieoliver.com/jamieoliver/recipe-database/xtra_med/46260004.jpg'
+      // 'https://img.jamieoliver.com/jamieoliver/recipe-database/xtra_med/46260004.jpg'
       'https://dummyimage.com/288x160/ccc/fff',
       [
         new Ingredient('waxy potatoes', 300),
