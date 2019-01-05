@@ -12,11 +12,13 @@ export const appRoutes: Routes = [
   },
   {
     path: 'recipe-book',
-    component: RecipesComponent
-  },
-  {
-    path: 'recipe-book/:id',
-    component: RecipeItemDetailComponent
+    component: RecipesComponent,
+    children: [
+      {
+        path: ':id',
+        component: RecipeItemDetailComponent
+      }
+    ]
   },
   {
     path: '',
