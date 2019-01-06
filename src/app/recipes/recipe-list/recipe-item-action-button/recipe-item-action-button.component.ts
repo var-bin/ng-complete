@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { Recipe } from '../../recipe.model';
 import { RecipeService } from '../../recipe.service';
@@ -11,7 +12,10 @@ import { RecipeService } from '../../recipe.service';
 export class RecipeItemActionButtonComponent implements OnInit {
   @Input() recipe: Recipe;
 
-  constructor(private recipeService: RecipeService) { }
+  constructor(
+    private recipeService: RecipeService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
   }
@@ -22,7 +26,10 @@ export class RecipeItemActionButtonComponent implements OnInit {
   }
 
   onEditRecipe() {
-    console.log('onEditRecipe works');
+    const recipeId = this.recipeService.getRecipeId(this.recipe) + 1;
+    const navigatedRecipe = `recipe-book-${recipeId}`;
+
+    this.router.navigate(['/recipe-book', navigatedRecipe, 'edit']);
   }
 
   onDeleteRecipe() {
