@@ -5,6 +5,7 @@ import { Router, NavigationExtras } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { Ingredient } from '../shared/models';
+
 import { ShoppingList } from './shopping-list.model';
 import { ShoppingListService } from './shopping-list.service';
 

@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { Ingredient } from '../../shared/models';
+
 import { ShoppingListService } from '../shopping-list.service';
 
 @Component({
