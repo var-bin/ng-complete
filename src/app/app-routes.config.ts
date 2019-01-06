@@ -3,10 +3,12 @@ import { Routes } from '@angular/router';
 import { PageNotFoundComponent } from './shared/components';
 import { ShoppingListComponent } from './shopping-list';
 
-import { RecipeItemDetailComponent } from './recipes/recipe-list';
-import { RecipeItemEditComponent } from './recipes/recipe-list';
+import {
+  RecipeItemDetailComponent,
+  RecipeListComponent,
+  RecipeItemEditComponent
+} from './recipes/recipe-list';
 import { RecipesComponent } from './recipes';
-
 
 export const appRoutes: Routes = [
   {
@@ -17,6 +19,10 @@ export const appRoutes: Routes = [
     path: 'recipe-book',
     component: RecipesComponent,
     children: [
+      {
+        path: '',
+        component: RecipeListComponent
+      },
       {
         path: ':id',
         component: RecipeItemDetailComponent
