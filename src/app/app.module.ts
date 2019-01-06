@@ -5,21 +5,24 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 
-import { RecipesComponent } from './recipes';
-import { RecipeService } from './recipes';
-import { RecipeListComponent } from './recipes/recipe-list';
-import { RecipeItemDetailComponent } from './recipes/recipe-list';
-import { RecipeItemComponent } from './recipes/recipe-list';
-import { RecipeItemActionButtonComponent } from './recipes/recipe-list';
-import { RecipeItemEditComponent } from './recipes/recipe-list';
+import { RecipesComponent, RecipeService } from './recipes';
+import {
+  RecipeListComponent,
+  RecipeItemDetailComponent,
+  RecipeItemComponent,
+  RecipeItemActionButtonComponent,
+  RecipeItemEditComponent
+} from './recipes/recipe-list';
 
-import { ShoppingListComponent } from './shopping-list';
-import { ShoppingEditComponent } from './shopping-list';
-import { ShoppingListItemComponent } from './shopping-list';
-import { ShoppingListService } from './shopping-list';
+import {
+  ShoppingListComponent,
+  ShoppingEditComponent,
+  ShoppingListItemComponent,
+  ShoppingListService
+} from './shopping-list';
 
 import { PageNotFoundComponent } from './shared/components';
-import { BetterHighlightDirective } from './shared/directives/better-highlight.directive';
+import { BetterHighlightDirective } from './shared/directives';
 
 import { AppRoutingModule } from './app-routing.module';
 
