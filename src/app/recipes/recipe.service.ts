@@ -57,4 +57,8 @@ export class RecipeService {
   getRecipeById(id: number): Recipe {
     return this.recipes[id];
   }
+
+  getRecipeId(recipe: Recipe): number {
+    return this.recipes.findIndex((_recipe) => _recipe.name === recipe.name);
+  }
 }
