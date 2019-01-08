@@ -1,3 +1,54 @@
-<p>
-  recipe-item-edit works!
-</p>
+<form
+  [formGroup]="editRecipeForm"
+  (ngSubmit)="onSubmit()">
+  <div class="row">
+    <div class="col">
+      <label for="itemTitle">Title</label>
+      <input type="text"
+        class="form-control mb-2"
+        id="itemTitle"
+        placeholder="Item title"
+        formControlName="itemTitle">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <label for="itemImage">Image</label>
+      <input type="number"
+        class="form-control mb-2"
+        id="itemImage"
+        placeholder="Image"
+        formControlName="itemImage"
+        min="1">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <label for="itemDescription">Description</label>
+      <input type="number"
+        class="form-control mb-2"
+        id="itemDescription"
+        placeholder="Image"
+        formControlName="itemDescription">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <label for="itemIngredients">Ingredients</label>
+      <input type="number"
+        class="form-control mb-2"
+        id="itemIngredients"
+        placeholder="Image"
+        formControlName="itemIngredients">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <button type="submit"
+        class="btn btn-primary mb-2"
+        [disabled]="!editRecipeForm.valid">
+        Add
+      </button>
+    </div>
+  </div>
+</form>
