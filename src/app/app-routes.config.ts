@@ -3,20 +3,22 @@ import { Routes } from '@angular/router';
 import { PageNotFoundComponent } from './shared/components';
 import { ShoppingListComponent } from './shopping-list';
 
+import { RecipesComponent, RecipeRouteActivatorService } from './recipes';
+
 import {
   RecipeItemDetailComponent,
   RecipeListComponent,
   RecipeItemEditComponent
 } from './recipes/recipe-list';
-import { RecipesComponent } from './recipes';
 
+import { routes } from './routes.enum';
 export const appRoutes: Routes = [
   {
-    path: 'shopping-list',
+    path: routes.SHOPPING_LIST,
     component: ShoppingListComponent
   },
   {
-    path: 'recipe-book',
+    path: routes.RECIPE_BOOK,
     component: RecipesComponent,
     children: [
       {
@@ -24,22 +26,28 @@ export const appRoutes: Routes = [
         component: RecipeListComponent
       },
       {
-        path: ':id',
-        component: RecipeItemDetailComponent
+        path: routes.RECIPE_BOOK_ITEM_DETAIL,
+        component: RecipeItemDetailComponent,
+        canActivate: [RecipeRouteActivatorService],
       },
       {
-        path: ':id/edit',
-        component: RecipeItemEditComponent
+        path: routes.RECIPE_BOOK_ITEM_EDIT,
+        component: RecipeItemEditComponent,
+        canActivate: [RecipeRouteActivatorService]
       }
     ]
   },
   {
     path: '',
-    redirectTo: '/recipe-book',
+    redirectTo: routes.RECIPE_BOOK_REDIRECT,
     pathMatch: 'full'
   },
   {
-    path: '**',
+    path: routes.PAGE_NOT_FOUND,
     component: PageNotFoundComponent
+  },
+  {
+    path: '**',
+    redirectTo: routes.PAGE_NOT_FOUND_REDIRECT
   }
 ];
