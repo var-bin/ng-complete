@@ -5,7 +5,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 
-import { RecipesComponent, RecipeService } from './recipes';
+import {
+  RecipesComponent,
+  RecipeService,
+  RecipeRouteActivatorService
+} from './recipes';
+
 import {
   RecipeListComponent,
   RecipeItemDetailComponent,
@@ -50,7 +55,8 @@ import { AppRoutingModule } from './app-routing.module';
   ],
   providers: [
     ShoppingListService,
-    RecipeService
+    RecipeService,
+    RecipeRouteActivatorService
   ],
   bootstrap: [AppComponent]
 })
