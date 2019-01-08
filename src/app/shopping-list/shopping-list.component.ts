@@ -9,6 +9,8 @@ import { Ingredient } from '../shared/models';
 import { ShoppingList } from './shopping-list.model';
 import { ShoppingListService } from './shopping-list.service';
 
+import { routes } from '../routes.enum';
+
 @Component({
   selector: 'app-shopping-list',
   templateUrl: './shopping-list.component.html',
@@ -69,13 +71,11 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
   }
 
   onGoToHome() {
-    console.log('onGoToHome works');
-
     const navExtras: NavigationExtras = {
       queryParams: {'session_id': 1},
       fragment: 'myAwesomeId'
     };
 
-    this.router.navigate(['/recipe-book'], navExtras);
+    this.router.navigate([routes.RECIPE_BOOK_REDIRECT], navExtras);
   }
 }

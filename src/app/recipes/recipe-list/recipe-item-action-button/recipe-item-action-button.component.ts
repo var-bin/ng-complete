@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { Recipe } from '../../recipe.model';
 import { RecipeService } from '../../recipe.service';
 
+import { routes } from '../../../routes.enum';
+
 @Component({
   selector: 'app-recipe-item-action-button',
   templateUrl: './recipe-item-action-button.component.html',
@@ -29,7 +31,7 @@ export class RecipeItemActionButtonComponent implements OnInit {
     const recipeId = this.recipeService.getRecipeId(this.recipe) + 1;
     const navigatedRecipe = `recipe-book-${recipeId}`;
 
-    this.router.navigate(['/recipe-book', navigatedRecipe, 'edit']);
+    this.router.navigate([routes.RECIPE_BOOK_REDIRECT, navigatedRecipe, 'edit']);
   }
 
   onDeleteRecipe() {
