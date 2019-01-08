@@ -19,23 +19,17 @@ export const appRoutes: Routes = [
   },
   {
     path: routes.RECIPE_BOOK,
-    component: RecipesComponent,
-    children: [
-      {
-        path: '',
-        component: RecipeListComponent
-      },
-      {
-        path: routes.RECIPE_BOOK_ITEM_DETAIL,
-        component: RecipeItemDetailComponent,
-        canActivate: [RecipeRouteActivatorService],
-      },
-      {
-        path: routes.RECIPE_BOOK_ITEM_EDIT,
-        component: RecipeItemEditComponent,
-        canActivate: [RecipeRouteActivatorService]
-      }
-    ]
+    component: RecipesComponent
+  },
+  {
+    path: routes.RECIPE_BOOK_ITEM_DETAIL,
+    component: RecipeItemDetailComponent,
+    canActivate: [RecipeRouteActivatorService],
+  },
+  {
+    path: routes.RECIPE_BOOK_ITEM_EDIT,
+    component: RecipeItemEditComponent,
+    canActivate: [RecipeRouteActivatorService]
   },
   {
     path: '',
