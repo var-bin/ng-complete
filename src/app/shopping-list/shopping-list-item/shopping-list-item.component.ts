@@ -14,7 +14,7 @@ import { ShoppingListService } from '../shopping-list.service';
 export class ShoppingListItemComponent implements OnInit {
   @Input() ingredient: Ingredient;
 
-  isEditMode: boolean = false;
+  isEditMode = false;
   shoppingListForm: FormGroup;
 
   constructor(private shoppingListService: ShoppingListService) { }
