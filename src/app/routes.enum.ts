@@ -3,8 +3,8 @@ export enum routes {
   RECIPE_BOOK = 'recipe-book',
   RECIPE_BOOK_REDIRECT = '/recipe-book',
   RECIPE_BOOK_LIST = '',
-  RECIPE_BOOK_ITEM_DETAIL = ':id',
-  RECIPE_BOOK_ITEM_EDIT = ':id/edit',
+  RECIPE_BOOK_ITEM_DETAIL = 'recipe-book/:id',
+  RECIPE_BOOK_ITEM_EDIT = 'recipe-book/:id/edit',
   PAGE_NOT_FOUND = 'not-found',
   PAGE_NOT_FOUND_REDIRECT = '/not-found'
 }
