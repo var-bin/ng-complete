@@ -21,10 +21,10 @@ export class RecipeItemDetailComponent implements OnInit {
 
   ngOnInit() {
     // Example of URL: /recipe-book/recipe-book-1
-    const userUrl: string[] = this.route.snapshot.params['id'].split('-');
-    const userId: number = +userUrl[userUrl.length - 1];
+    const recipeUrlParts: string[] = this.route.snapshot.params['id'].split('-');
+    const recipeId: number = +recipeUrlParts[recipeUrlParts.length - 1];
 
-    this.recipe = this.recipeService.getRecipeById(userId - 1);
+    this.recipe = this.recipeService.getRecipeById(recipeId - 1);
 
     // Capture query params: `allowEdit`, `test` if available
     let queryParams = {};
