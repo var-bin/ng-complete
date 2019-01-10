@@ -16,7 +16,8 @@ import {
   RecipeItemDetailComponent,
   RecipeItemComponent,
   RecipeItemActionButtonComponent,
-  RecipeItemEditComponent
+  RecipeItemEditComponent,
+  RecipeItemEditResolverService
 } from './recipes/recipe-list';
 
 import {
@@ -56,7 +57,8 @@ import { AppRoutingModule } from './app-routing.module';
   providers: [
     ShoppingListService,
     RecipeService,
-    RecipeRouteActivatorService
+    RecipeRouteActivatorService,
+    RecipeItemEditResolverService
   ],
   bootstrap: [AppComponent]
 })
