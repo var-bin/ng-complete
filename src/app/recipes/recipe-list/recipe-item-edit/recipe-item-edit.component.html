@@ -72,7 +72,7 @@
     <div class="col">
       <button type="submit"
         class="btn btn-primary mb-2"
-        [disabled]="!editRecipeForm.valid">
+        [disabled]="!isValid() || !isDirty()">
         Submit
       </button>
     </div>
