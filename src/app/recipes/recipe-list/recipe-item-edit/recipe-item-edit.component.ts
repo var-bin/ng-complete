@@ -1,10 +1,13 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 import { Subscription } from 'rxjs';
+
 import { Recipe } from '../../recipe.model';
 import { Ingredient } from 'src/app/shared/models';
+import { DialogService } from 'src/app/shared/services';
+
 
 @Component({
   selector: 'app-recipe-item-edit',
@@ -18,7 +21,8 @@ export class RecipeItemEditComponent implements OnInit, OnDestroy {
   private routeDataSubscription$: Subscription;
 
   constructor(
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public dialogService: DialogService
   ) { }
 
   ngOnInit() {
@@ -49,10 +53,24 @@ export class RecipeItemEditComponent implements OnInit, OnDestroy {
 
   onSubmit(): void {
     console.log('onSubmit works', this.editRecipeForm.value);
+
+    this.markAsPristine();
   }
 
   ngOnDestroy() {
     this.routeDataSubscription$.unsubscribe();
+  }
+
+  isValid(): boolean {
+    return this.editRecipeForm.valid;
+  }
+
+  isDirty(): boolean {
+    return this.editRecipeForm.dirty;
+  }
+
+  markAsPristine(): void {
+    this.editRecipeForm.markAsPristine();
   }
 
   getIngredientName(key: string, index: number): string {
