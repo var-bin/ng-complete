@@ -4,3 +4,4 @@ export { RecipeItemActionButtonComponent } from './recipe-item-action-button/rec
 export { RecipeItemDetailComponent } from './recipe-item-detail/recipe-item-detail.component';
 export { RecipeItemEditComponent } from './recipe-item-edit/recipe-item-edit.component';
 export { RecipeItemEditResolverService } from './recipe-item-edit-resolver.service';
+export { CanDeactivateGuard } from './recipe-item-edit/can-deactivate.guard';

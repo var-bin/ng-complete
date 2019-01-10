@@ -8,7 +8,8 @@ import { RecipesComponent, RecipeRouteActivatorService } from './recipes';
 import {
   RecipeItemDetailComponent,
   RecipeItemEditComponent,
-  RecipeItemEditResolverService
+  RecipeItemEditResolverService,
+  CanDeactivateGuard
 } from './recipes/recipe-list';
 
 import { routes } from './routes.enum';
@@ -30,6 +31,7 @@ export const appRoutes: Routes = [
     path: routes.RECIPE_BOOK_ITEM_EDIT,
     component: RecipeItemEditComponent,
     canActivate: [RecipeRouteActivatorService],
+    canDeactivate: [CanDeactivateGuard],
     resolve: {
       recipe: RecipeItemEditResolverService
     }

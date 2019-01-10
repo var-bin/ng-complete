@@ -17,7 +17,8 @@ import {
   RecipeItemComponent,
   RecipeItemActionButtonComponent,
   RecipeItemEditComponent,
-  RecipeItemEditResolverService
+  RecipeItemEditResolverService,
+  CanDeactivateGuard
 } from './recipes/recipe-list';
 
 import {
@@ -29,6 +30,7 @@ import {
 
 import { PageNotFoundComponent } from './shared/components';
 import { BetterHighlightDirective } from './shared/directives';
+import { DialogService } from './shared/services';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -58,7 +60,9 @@ import { AppRoutingModule } from './app-routing.module';
     ShoppingListService,
     RecipeService,
     RecipeRouteActivatorService,
-    RecipeItemEditResolverService
+    RecipeItemEditResolverService,
+    DialogService,
+    CanDeactivateGuard
   ],
   bootstrap: [AppComponent]
 })
