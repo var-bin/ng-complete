@@ -16,6 +16,7 @@ interface IFormValue {
 @Injectable()
 export class RecipeService {
   changedRecipe = new EventEmitter<Recipe>();
+  changeRecipes = new EventEmitter<Recipe[]>();
 
   private recipes: Recipe[] = [
     new Recipe(
@@ -76,13 +77,13 @@ export class RecipeService {
     return this.recipes.findIndex((_recipe) => _recipe.name === recipe.name);
   }
 
-  updateRecipe(recipe: IFormValue): void {
+  updateRecipe(recipe: IFormValue, id: number): void {
     const editedRecipe = this.getEditedRecipe(recipe);
-    const recipeId = this.getRecipeId(editedRecipe);
 
-    this.recipes[recipeId] = editedRecipe;
+    this.recipes[id] = editedRecipe;
 
-    this.changedRecipe.emit(this.getRecipeById(recipeId));
+    this.changedRecipe.emit(this.getRecipeById(id));
+    this.changeRecipes.emit(this.getAllRecipes());
   }
 
   getIngredientName(key: string, index: number): string {
