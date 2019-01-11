@@ -58,7 +58,12 @@ export class RecipeItemEditComponent implements OnInit, OnDestroy {
   onSubmit(): void {
     console.log('onSubmit works', this.editRecipeForm.value, this.editRecipeForm.value.recipeIngredients);
 
-    this.recipeService.updateRecipe(this.editRecipeForm.value);
+    const recipeId = this.recipeService.getRecipeId(this.editedRecipe);
+
+    this.recipeService.updateRecipe(
+      this.editRecipeForm.value,
+      recipeId
+    );
 
     this.markAsPristine();
   }
