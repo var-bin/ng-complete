@@ -1,8 +1,6 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-
-import { Subscription } from 'rxjs';
 
 import { Recipe } from '../../recipe.model';
 import { Ingredient } from 'src/app/shared/models';
@@ -14,11 +12,9 @@ import { RecipeService } from '../../recipe.service';
   templateUrl: './recipe-item-edit.component.html',
   styleUrls: ['./recipe-item-edit.component.scss']
 })
-export class RecipeItemEditComponent implements OnInit, OnDestroy {
+export class RecipeItemEditComponent implements OnInit {
   editRecipeForm: FormGroup;
   editedRecipe: Recipe;
-
-  private routeDataSubscription$: Subscription;
 
   constructor(
     public dialogService: DialogService,
@@ -27,10 +23,7 @@ export class RecipeItemEditComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.routeDataSubscription$ = this.route.data
-      .subscribe((data: { recipe: Recipe }) => {
-        this.editedRecipe = data.recipe;
-      });
+    this.editedRecipe = this.route.snapshot.data['recipe'];
 
     this.editRecipeForm = new FormGroup({
       recipeTitle: new FormControl(this.editedRecipe.name, [
@@ -64,10 +57,6 @@ export class RecipeItemEditComponent implements OnInit, OnDestroy {
     );
 
     this.markAsPristine();
-  }
-
-  ngOnDestroy() {
-    this.routeDataSubscription$.unsubscribe();
   }
 
   isValid(): boolean {
