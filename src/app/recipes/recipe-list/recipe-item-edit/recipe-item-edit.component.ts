@@ -7,7 +7,7 @@ import { Subscription } from 'rxjs';
 import { Recipe } from '../../recipe.model';
 import { Ingredient } from 'src/app/shared/models';
 import { DialogService } from 'src/app/shared/services';
-
+import { RecipeService } from '../../recipe.service';
 
 @Component({
   selector: 'app-recipe-item-edit',
@@ -21,8 +21,9 @@ export class RecipeItemEditComponent implements OnInit, OnDestroy {
   private routeDataSubscription$: Subscription;
 
   constructor(
+    public dialogService: DialogService,
     private route: ActivatedRoute,
-    public dialogService: DialogService
+    private recipeService: RecipeService
   ) { }
 
   ngOnInit() {
@@ -44,15 +45,20 @@ export class RecipeItemEditComponent implements OnInit, OnDestroy {
         Validators.minLength(10)
       ]),
       recipeIngredients: new FormGroup(
-        this.mapIngredients<Ingredient>(this.editedRecipe.ingredients)
+        this.recipeService.mapIngredientsToObject<Ingredient>(this.editedRecipe.ingredients)
       )
     });
 
-    this.mapIngredients<Ingredient>(this.editedRecipe.ingredients);
+    this.recipeService.changedRecipe
+      .subscribe((_recipe: Recipe) => {
+        this.editedRecipe = _recipe;
+      });
   }
 
   onSubmit(): void {
-    console.log('onSubmit works', this.editRecipeForm.value);
+    console.log('onSubmit works', this.editRecipeForm.value, this.editRecipeForm.value.recipeIngredients);
+
+    this.recipeService.updateRecipe(this.editRecipeForm.value);
 
     this.markAsPristine();
   }
@@ -74,25 +80,7 @@ export class RecipeItemEditComponent implements OnInit, OnDestroy {
   }
 
   getIngredientName(key: string, index: number): string {
-    return `ingredient${key[0].toUpperCase()}${key.slice(1)}_${index}`;
-  }
-
-  private mapIngredients<T>(ingredients: T[]) {
-    const formControls: {[key: string]: FormControl} = {};
-
-    ingredients.forEach((ingredient: T, index: number) => {
-      for (const key in ingredient) {
-        // Don't use `ingredient.hasOwnProperty(key)` directly. It may be overwritten
-        if ({}.hasOwnProperty.call(ingredient, key)) {
-          const ingredientName = this.getIngredientName(key, index);
-
-          formControls[`${ingredientName}`] = new FormControl(ingredient[key], [
-            Validators.required
-          ]);
-        }
-      }
-    });
-
-    return formControls;
+    return this.recipeService
+      .getIngredientName(key, index);
   }
 }
