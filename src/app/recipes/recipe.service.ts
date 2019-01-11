@@ -1,12 +1,22 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { Recipe } from './recipe.model';
 import { Ingredient } from '../shared/models';
 
 import { ShoppingListService } from '../shopping-list';
 
+interface IFormValue {
+  recipeTitle: string;
+  recipeDescription: string;
+  recipeImage: string;
+  recipeIngredients: { [key: string]: string };
+}
+
 @Injectable()
 export class RecipeService {
+  changedRecipe = new EventEmitter<Recipe>();
+
   private recipes: Recipe[] = [
     new Recipe(
       'Basic latkes',
@@ -40,6 +50,10 @@ export class RecipeService {
 
   constructor(private shoppingListService: ShoppingListService) {}
 
+  private static isObject(value: any): boolean {
+    return value !== null && (typeof value === 'object');
+  }
+
   getAllRecipes(): Recipe[] {
     // Using `slice` for returning a new copy of array instead of returning refference
     // It returns a new array
@@ -60,5 +74,87 @@ export class RecipeService {
 
   getRecipeId(recipe: Recipe): number {
     return this.recipes.findIndex((_recipe) => _recipe.name === recipe.name);
+  }
+
+  updateRecipe(recipe: IFormValue): void {
+    const editedRecipe = this.getEditedRecipe(recipe);
+    const recipeId = this.getRecipeId(editedRecipe);
+
+    this.recipes[recipeId] = editedRecipe;
+
+    this.changedRecipe.emit(this.getRecipeById(recipeId));
+  }
+
+  getIngredientName(key: string, index: number): string {
+    return `ingredient${key[0].toUpperCase()}${key.slice(1)}_${index}`;
+  }
+
+  mapIngredientsToObject<T>(ingredients: T[]) {
+    const formControls: {[key: string]: FormGroup} = {};
+
+    ingredients.forEach((ingredient: T, index: number) => {
+      const controls: { [key: string]: FormControl } = {};
+
+      for (const key in ingredient) {
+        // Don't use `ingredient.hasOwnProperty(key)` directly. It may be overwritten
+        if ({}.hasOwnProperty.call(ingredient, key)) {
+          const ingredientName = this.getIngredientName(key, index);
+
+          controls[`${ingredientName}`] = new FormControl(ingredient[key], [
+            Validators.required
+          ]);
+        }
+      }
+
+      formControls[`ingredient${index}`] = new FormGroup(controls);
+    });
+
+    return formControls;
+  }
+
+  /**
+   * @param formValue - Object with recipe data which comes from edit form
+   */
+  private getEditedRecipe(formValue: IFormValue): Recipe {
+    return new Recipe(
+      formValue.recipeTitle,
+      formValue.recipeDescription,
+      formValue.recipeImage,
+      this.mapIngredientsToArray(formValue.recipeIngredients)
+    );
+  }
+
+  /**
+   * @param ingredients - Object with ingredients data. It comes from edit form `FormGroup`. It has structure like this:
+   * ```
+   * key: {
+   *    key: {
+   *      key: value
+   *      key: value
+   *    }
+   * }
+   * ```
+   */
+  private mapIngredientsToArray(ingredients: any): Ingredient[] {
+    const editedIngredients: Ingredient[] = [];
+
+    for (const key in ingredients) {
+      if ({}.hasOwnProperty.call(ingredients, key)) {
+        if (RecipeService.isObject(key)) {
+          this.mapIngredientsToArray(key);
+        } else {
+          const values = Object.values(ingredients[key]);
+
+          editedIngredients.push(
+            new Ingredient(
+              <string>values[0],
+              <number>values[1]
+            )
+          );
+        }
+      }
+    }
+
+    return editedIngredients;
   }
 }
