@@ -31,7 +31,7 @@ export class RecipeItemActionButtonComponent implements OnInit {
     const recipeId = this.recipeService.getRecipeId(this.recipe) + 1;
     const navigatedRecipe = `recipe-book-${recipeId}`;
 
-    this.router.navigate([routes.RECIPE_BOOK_REDIRECT, navigatedRecipe, 'edit']);
+    this.router.navigate([routes.HOME_REDIRECT, navigatedRecipe, 'edit']);
   }
 
   onDeleteRecipe() {

@@ -38,7 +38,7 @@ export const appRoutes: Routes = [
   },
   {
     path: '',
-    redirectTo: routes.RECIPE_BOOK_REDIRECT,
+    redirectTo: routes.HOME_REDIRECT,
     pathMatch: 'full'
   },
   {

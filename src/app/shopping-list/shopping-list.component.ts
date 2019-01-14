@@ -76,6 +76,6 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
       fragment: 'myAwesomeId'
     };
 
-    this.router.navigate([routes.RECIPE_BOOK_REDIRECT], navExtras);
+    this.router.navigate([routes.HOME_REDIRECT], navExtras);
   }
 }

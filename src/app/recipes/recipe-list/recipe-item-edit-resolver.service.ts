@@ -33,7 +33,7 @@ export class RecipeItemEditResolverService implements Resolve<Recipe> {
           if (recipe) {
             return of(recipe);
           } else {
-            this.router.navigate([routes.RECIPE_BOOK_REDIRECT]);
+            this.router.navigate([routes.HOME_REDIRECT]);
 
             return EMPTY;
           }
