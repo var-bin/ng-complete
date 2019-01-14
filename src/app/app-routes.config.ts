@@ -12,8 +12,14 @@ import {
   CanDeactivateGuard
 } from './recipes/recipe-list';
 
+import { RxjsBasicsComponent } from './rxjs-basics';
+
 import { routes } from './routes.enum';
 export const appRoutes: Routes = [
+  {
+    path: routes.RXJS_BASICS,
+    component: RxjsBasicsComponent
+  },
   {
     path: routes.SHOPPING_LIST,
     component: ShoppingListComponent
