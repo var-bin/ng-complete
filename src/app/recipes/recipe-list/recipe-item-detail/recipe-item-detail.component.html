@@ -1,7 +1,11 @@
 <div class="card mb-3">
   <header class="card-header">
-    <div class="row">
-      <div class="col">
+    <div class="row flex-row-reverse">
+      <div class="col-sm-3">
+        <app-recipe-item-action-button
+          [recipe]="recipe"></app-recipe-item-action-button>
+      </div>
+      <div class="col-sm-9">
         <h4>{{recipe.name}}</h4>
       </div>
     </div>
@@ -19,10 +23,6 @@
           <h4>
             Ingredients:
           </h4>
-        </div>
-        <div class="col">
-          <app-recipe-item-action-button
-            [recipe]="recipe"></app-recipe-item-action-button>
         </div>
       </div>
 
