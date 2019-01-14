@@ -7,12 +7,14 @@
             <h4>{{recipe.name}}</h4>
           </div>
           <div class="col">
-            <app-recipe-detail
-              [recipe]="recipe"></app-recipe-detail>
+            <app-recipe-item-action-button
+              [recipe]="recipe"></app-recipe-item-action-button>
           </div>
         </div>
       </header>
-      <a href="#">
+      <a [routerLink]="['/recipe-book', getRecipeId()]"
+         [queryParams]="{allowEdit: '1', test: '1'}"
+         fragment="loading">
         <img class="card-img-top"
           [src]="recipe.imagePath"
           alt="{{recipe.name}}">

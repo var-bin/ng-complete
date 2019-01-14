@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { Ingredient } from '../../shared/models';
+
 import { ShoppingListService } from '../shopping-list.service';
 
 @Component({
@@ -13,7 +14,7 @@ import { ShoppingListService } from '../shopping-list.service';
 export class ShoppingListItemComponent implements OnInit {
   @Input() ingredient: Ingredient;
 
-  isEditMode: boolean = false;
+  isEditMode = false;
   shoppingListForm: FormGroup;
 
   constructor(private shoppingListService: ShoppingListService) { }

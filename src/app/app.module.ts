@@ -4,16 +4,35 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
-import { RecipesComponent } from './recipes/recipes.component';
-import { RecipeListComponent } from './recipes/recipe-list/recipe-list.component';
-import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.component';
-import { RecipeItemComponent } from './recipes/recipe-list/recipe-item/recipe-item.component';
-import { ShoppingListComponent } from './shopping-list/shopping-list.component';
-import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-edit.component';
-import { ShoppingListItemComponent } from './shopping-list/shopping-list-item/shopping-list-item.component';
-import { BetterHighlightDirective } from './shared/directives/better-highlight.directive';
 
-import { ShoppingListService } from './shopping-list/shopping-list.service';
+import {
+  RecipesComponent,
+  RecipeService,
+  RecipeRouteActivatorService
+} from './recipes';
+
+import {
+  RecipeListComponent,
+  RecipeItemDetailComponent,
+  RecipeItemComponent,
+  RecipeItemActionButtonComponent,
+  RecipeItemEditComponent,
+  RecipeItemEditResolverService,
+  CanDeactivateGuard
+} from './recipes/recipe-list';
+
+import {
+  ShoppingListComponent,
+  ShoppingEditComponent,
+  ShoppingListItemComponent,
+  ShoppingListService
+} from './shopping-list';
+
+import { PageNotFoundComponent } from './shared/components';
+import { BetterHighlightDirective } from './shared/directives';
+import { DialogService } from './shared/services';
+
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -21,19 +40,30 @@ import { ShoppingListService } from './shopping-list/shopping-list.service';
     HeaderComponent,
     RecipesComponent,
     RecipeListComponent,
-    RecipeDetailComponent,
     RecipeItemComponent,
+    RecipeItemDetailComponent,
     ShoppingListComponent,
     ShoppingEditComponent,
     ShoppingListItemComponent,
-    BetterHighlightDirective
+    BetterHighlightDirective,
+    PageNotFoundComponent,
+    RecipeItemActionButtonComponent,
+    RecipeItemEditComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AppRoutingModule
   ],
-  providers: [ShoppingListService],
+  providers: [
+    ShoppingListService,
+    RecipeService,
+    RecipeRouteActivatorService,
+    RecipeItemEditResolverService,
+    DialogService,
+    CanDeactivateGuard
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

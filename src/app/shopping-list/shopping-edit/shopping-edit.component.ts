@@ -8,7 +8,7 @@ import { ShoppingListService } from '../shopping-list.service';
   styleUrls: ['./shopping-edit.component.scss']
 })
 export class ShoppingEditComponent implements OnInit {
-  isEditMode: boolean = false;
+  isEditMode = false;
 
   constructor(private shoppingListService: ShoppingListService) { }
 

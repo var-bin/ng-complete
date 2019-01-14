@@ -1,0 +1,82 @@
+<h2>
+  You're editting recipe: {{ editedRecipe.name }}
+</h2>
+
+<form
+  [formGroup]="editRecipeForm"
+  (ngSubmit)="onSubmit()">
+  <div class="row">
+    <div class="col">
+      <label for="recipeTitle">Title</label>
+      <input type="text"
+        class="form-control mb-2"
+        id="recipeTitle"
+        placeholder="Recipe title"
+        formControlName="recipeTitle"
+        name="recipeTitle">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <label for="recipeImage">Recipe Image</label>
+      <input type="text"
+        class="form-control mb-2"
+        id="recipeImage"
+        placeholder="Recipe Image"
+        formControlName="recipeImage"
+        name="recipeImage">
+
+      <img [src]="editedRecipe.imagePath"
+        [alt]="'Image for '+ editedRecipe.name"
+        class="img-thumbnail">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <label for="recipeDescription">Recipe Description</label>
+      <textarea
+        class="form-control mb-2"
+        name="recipeDescription"
+        id="recipeDescription"
+        rows="3"
+        placeholder="Recipe Description"
+        formControlName="recipeDescription"></textarea>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col"
+      formGroupName="recipeIngredients">
+      <label>Recipe Ingredients</label>
+      <div
+        *ngFor="let ingredient of editedRecipe.ingredients; let i=index;">
+        <div [formGroupName]="'ingredient'+i" class="row">
+          <div class="col-sm-10">
+            <input type="text"
+              [name]="getIngredientName('name', i)"
+              class="form-control mb-2"
+              [id]="getIngredientName('name', i)"
+              placeholder="Name"
+              [formControlName]="getIngredientName('name', i)">
+          </div>
+          <div class="col-sm-2">
+            <input type="number"
+              [name]="getIngredientName('amount', i)"
+              class="form-control mb-2"
+              [id]="getIngredientName('amount', i)"
+              placeholder="Amount"
+              [formControlName]="getIngredientName('amount', i)">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <button type="submit"
+        class="btn btn-primary mb-2"
+        [disabled]="!isValid() || !isDirty()">
+        Submit
+      </button>
+    </div>
+  </div>
+</form>

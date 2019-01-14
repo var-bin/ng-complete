@@ -1,3 +1,11 @@
+<h2>Shopping List</h2>
+
+<button type="button"
+  class="btn btn-primary"
+  (click)="onGoToHome()">
+  Go to Home
+</button>
+
 <div class="row">
   <div class="col-12">
     <hr>
@@ -33,12 +41,19 @@
       </div>
     </form>
 
-    <ul class="list-group">
-      <li class="list-group-item"
-        *ngFor="let ingredient of ingredients">
-        <app-shopping-list-item
-          [ingredient]="ingredient"></app-shopping-list-item>
-      </li>
-    </ul>
+    <div class="card mb-2"
+      *ngFor="let slItem of shoppingLists">
+      <div class="card-body">
+        <h5 class="card-title">{{ slItem.title }}</h5>
+      </div>
+
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item"
+          *ngFor="let ingredient of slItem.ingredients">
+          <app-shopping-list-item
+            [ingredient]="ingredient"></app-shopping-list-item>
+        </li>
+      </ul>
+    </div>
   </div>
 </div>
