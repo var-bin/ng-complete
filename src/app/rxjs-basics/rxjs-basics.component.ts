@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { interval } from 'rxjs';
+import { interval, Observable, Observer, Subscribable } from 'rxjs';
 import { takeUntil, filter } from 'rxjs/operators';
 
 @Component({
@@ -13,7 +13,7 @@ export class RxjsBasicsComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.firstTenNumbers();
+    this.myFirstObserver();
   }
 
   private firstTenNumbers() {
@@ -27,5 +27,23 @@ export class RxjsBasicsComponent implements OnInit {
       .subscribe((n: number) => {
         console.log(`number: ${n}`);
       });
+  }
+
+  private myFirstObserver() {
+    const myObservable: Subscribable<number> = Observable.create(function(observer: Observer<number>) {
+      observer.next(1);
+      observer.next(2);
+      observer.next(3);
+      setTimeout(() => {
+        observer.next(4);
+        observer.complete();
+      });
+    });
+
+    myObservable.subscribe({
+      next: (val: number) => console.log(`got value: ${val}`),
+      error: err => console.log('error: ', err),
+      complete: () => console.log('done!')
+    });
   }
 }
