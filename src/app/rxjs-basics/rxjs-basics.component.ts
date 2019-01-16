@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { interval, Observable, Observer, Subscribable } from 'rxjs';
+import { interval, Observable, Observer } from 'rxjs';
 import { takeUntil, filter } from 'rxjs/operators';
 
 @Component({
@@ -30,7 +30,7 @@ export class RxjsBasicsComponent implements OnInit {
   }
 
   private myFirstObserver() {
-    const myObservable: Subscribable<number> = Observable.create(function(observer: Observer<number>) {
+    const myObservable: Observable<number> = Observable.create(function(observer: Observer<number>) {
       observer.next(1);
       observer.next(2);
       observer.next(3);
@@ -38,6 +38,7 @@ export class RxjsBasicsComponent implements OnInit {
         observer.next(4);
         observer.complete();
       });
+      observer.error('Oooops, something went wron');
     });
 
     myObservable.subscribe({
