@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
-import { interval, Observable, Observer } from 'rxjs';
+import { interval, Observable, Observer, Subscription } from 'rxjs';
 import { takeUntil, filter } from 'rxjs/operators';
 
 @Component({
@@ -8,22 +8,25 @@ import { takeUntil, filter } from 'rxjs/operators';
   templateUrl: './rxjs-basics.component.html',
   styleUrls: ['./rxjs-basics.component.scss']
 })
-export class RxjsBasicsComponent implements OnInit {
+export class RxjsBasicsComponent implements OnInit, OnDestroy {
+  private myFirstObsSubscription$: Subscription;
+  private firstTenNumbersSubscription$: Subscription;
 
   constructor() { }
 
   ngOnInit() {
     this.myFirstObserver();
+    this.firstTenNumbers();
   }
 
   private firstTenNumbers() {
     const myNumbers = interval(1000);
     const firstTenNumbers = myNumbers.pipe(filter(n => n > 10));
 
-    myNumbers
-      .pipe(
+    this.firstTenNumbersSubscription$ = myNumbers
+      /* .pipe(
         takeUntil(firstTenNumbers)
-      )
+      ) */
       .subscribe((n: number) => {
         console.log(`number: ${n}`);
       });
@@ -41,10 +44,15 @@ export class RxjsBasicsComponent implements OnInit {
       observer.error('Oooops, something went wron');
     });
 
-    myObservable.subscribe({
+    this.myFirstObsSubscription$ = myObservable.subscribe({
       next: (val: number) => console.log(`got value: ${val}`),
       error: err => console.log('error: ', err),
       complete: () => console.log('done!')
     });
+  }
+
+  ngOnDestroy() {
+    this.firstTenNumbersSubscription$.unsubscribe();
+    this.myFirstObsSubscription$.unsubscribe();
   }
 }
