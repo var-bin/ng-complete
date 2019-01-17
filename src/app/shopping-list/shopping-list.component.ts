@@ -4,8 +4,6 @@ import { Router, NavigationExtras } from '@angular/router';
 
 import { Subscription } from 'rxjs';
 
-import { Ingredient } from '../shared/models';
-
 import { ShoppingList } from './shopping-list.model';
 import { ShoppingListService } from './shopping-list.service';
 
@@ -17,11 +15,10 @@ import { routes } from '../routes.enum';
   styleUrls: ['./shopping-list.component.scss']
 })
 export class ShoppingListComponent implements OnInit, OnDestroy {
-  ingredients: Ingredient[];
   addNewItemForm: FormGroup;
   shoppingLists: ShoppingList[];
 
-  private ingredientsSubscription: Subscription;
+  private shoppingListsSubscription$: Subscription;
 
   constructor(
     private shoppingListService: ShoppingListService,
@@ -29,7 +26,6 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.ingredients = this.shoppingListService.getAllIngredients();
     this.shoppingLists = this.shoppingListService.getAllShoppingLists();
     this.addNewItemForm = new FormGroup({
       itemName: new FormControl('', [
@@ -42,7 +38,7 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
       ])
     });
 
-    this.ingredientsSubscription = this.shoppingListService.changedShoppingLists
+    this.shoppingListsSubscription$ = this.shoppingListService.changedShoppingLists$
       .subscribe((shoppingLists: ShoppingList[]) => {
         this.shoppingLists = shoppingLists;
       });
@@ -67,7 +63,7 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.ingredientsSubscription.unsubscribe();
+    this.shoppingListsSubscription$.unsubscribe();
   }
 
   onGoToHome() {
