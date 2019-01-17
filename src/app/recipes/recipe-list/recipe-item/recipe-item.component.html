@@ -6,6 +6,9 @@
           <div class="col">
             <h4>{{recipe.name}}</h4>
           </div>
+          <div class="col" *ngIf="recipe.isDeleted">
+            <h5>Deleted</h5>
+          </div>
           <div class="col">
             <app-recipe-item-action-button
               [recipe]="recipe"></app-recipe-item-action-button>
