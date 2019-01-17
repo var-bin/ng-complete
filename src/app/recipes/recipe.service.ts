@@ -84,9 +84,7 @@ export class RecipeService {
   }
 
   updateRecipe(recipe: IFormValue, id: number): void {
-    const editedRecipe = this.getEditedRecipe(recipe);
-
-    this.recipes[id] = editedRecipe;
+    this.recipes[id] = this.getEditedRecipe(recipe);
 
     this.changeRecipe$.next(this.recipes[id]);
   }
