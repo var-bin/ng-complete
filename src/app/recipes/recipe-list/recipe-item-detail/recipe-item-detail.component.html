@@ -5,7 +5,10 @@
         <app-recipe-item-action-button
           [recipe]="recipe"></app-recipe-item-action-button>
       </div>
-      <div class="col-sm-9">
+      <div class="col-sm-3" *ngIf="recipe.isDeleted">
+        <h5>Deleted</h5>
+      </div>
+      <div [class]="getCSSClassName()">
         <h4>{{recipe.name}}</h4>
       </div>
     </div>
