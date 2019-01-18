@@ -43,4 +43,8 @@ export class RecipeItemDetailComponent implements OnInit {
         queryParams = _queryParams;
       });
   }
+
+  getCSSClassName(): string {
+    return this.recipe.isDeleted ? 'col-sm-6' : 'col-sm-9';
+  }
 }

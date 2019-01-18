@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
@@ -7,14 +7,18 @@ import { Ingredient } from 'src/app/shared/models';
 import { DialogService } from 'src/app/shared/services';
 import { RecipeService } from '../../recipe.service';
 
+import { Subscription } from 'rxjs';
+
 @Component({
   selector: 'app-recipe-item-edit',
   templateUrl: './recipe-item-edit.component.html',
   styleUrls: ['./recipe-item-edit.component.scss']
 })
-export class RecipeItemEditComponent implements OnInit {
+export class RecipeItemEditComponent implements OnInit, OnDestroy {
   editRecipeForm: FormGroup;
   editedRecipe: Recipe;
+
+  private changeRecipeSubscription$: Subscription;
 
   constructor(
     public dialogService: DialogService,
@@ -25,24 +29,9 @@ export class RecipeItemEditComponent implements OnInit {
   ngOnInit() {
     this.editedRecipe = this.route.snapshot.data['recipe'];
 
-    this.editRecipeForm = new FormGroup({
-      recipeTitle: new FormControl(this.editedRecipe.name, [
-        Validators.required,
-        Validators.minLength(5)
-      ]),
-      recipeImage: new FormControl(this.editedRecipe.imagePath, [
-        Validators.required
-      ]),
-      recipeDescription: new FormControl(this.editedRecipe.description, [
-        Validators.required,
-        Validators.minLength(10)
-      ]),
-      recipeIngredients: new FormGroup(
-        this.recipeService.mapIngredientsToObject<Ingredient>(this.editedRecipe.ingredients)
-      )
-    });
+    this.initEditRecipeForm();
 
-    this.recipeService.changedRecipe
+    this.changeRecipeSubscription$ = this.recipeService.changeRecipe$
       .subscribe((_recipe: Recipe) => {
         this.editedRecipe = _recipe;
       });
@@ -74,5 +63,31 @@ export class RecipeItemEditComponent implements OnInit {
   getIngredientName(key: string, index: number): string {
     return this.recipeService
       .getIngredientName(key, index);
+  }
+
+  private initEditRecipeForm(): void {
+    this.editRecipeForm = new FormGroup({
+      recipeTitle: new FormControl(this.editedRecipe.name, [
+        Validators.required,
+        Validators.minLength(5)
+      ]),
+      recipeImage: new FormControl(this.editedRecipe.imagePath, [
+        Validators.required
+      ]),
+      recipeDescription: new FormControl(this.editedRecipe.description, [
+        Validators.required,
+        Validators.minLength(10)
+      ]),
+      recipeDeleted: new FormControl(this.editedRecipe.isDeleted, [
+        Validators.required
+      ]),
+      recipeIngredients: new FormGroup(
+        this.recipeService.mapIngredientsToObject<Ingredient>(this.editedRecipe.ingredients)
+      )
+    });
+  }
+
+  ngOnDestroy() {
+    this.changeRecipeSubscription$.unsubscribe();
   }
 }

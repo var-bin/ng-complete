@@ -11,7 +11,8 @@
     aria-labelledby="dropdownMenu2">
     <button class="dropdown-item"
       type="button"
-      (click)="onToShoppingList()">
+      (click)="onToShoppingList()"
+      [disabled]="recipe.isDeleted">
       To Shopping List
     </button>
     <button class="dropdown-item"
@@ -21,7 +22,8 @@
     </button>
     <button class="dropdown-item"
       type="button"
-      (click)="onDeleteRecipe()">
+      (click)="onDeleteRecipe()"
+      [disabled]="recipe.isDeleted">
       Delete Recipe
     </button>
   </div>

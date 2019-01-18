@@ -35,6 +35,8 @@ export class RecipeItemActionButtonComponent implements OnInit {
   }
 
   onDeleteRecipe() {
-    console.log('onDeleteRecipe works');
+    const recipeId = this.recipeService.getRecipeId(this.recipe);
+
+    this.recipeService.setRecipeDeleted(recipeId);
   }
 }

@@ -1,5 +1,7 @@
-import { Injectable, EventEmitter } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+
+import { Subject } from 'rxjs';
 
 import { Recipe } from './recipe.model';
 import { Ingredient } from '../shared/models';
@@ -10,13 +12,13 @@ interface IFormValue {
   recipeTitle: string;
   recipeDescription: string;
   recipeImage: string;
+  recipeDeleted: boolean;
   recipeIngredients: { [key: string]: string };
 }
 
 @Injectable()
 export class RecipeService {
-  changedRecipe = new EventEmitter<Recipe>();
-  changeRecipes = new EventEmitter<Recipe[]>();
+  changeRecipe$ = new Subject<Recipe>();
 
   private recipes: Recipe[] = [
     new Recipe(
@@ -51,6 +53,10 @@ export class RecipeService {
 
   constructor(private shoppingListService: ShoppingListService) {}
 
+  /**
+   * The code of function is taking from [speaking.js > 'Pitfall: typeof null'](http://speakingjs.com/es5/ch09.html#isobject_typeof)
+   * @param value - any type of value for checking either it's an object or not
+   */
   private static isObject(value: any): boolean {
     return value !== null && (typeof value === 'object');
   }
@@ -78,12 +84,9 @@ export class RecipeService {
   }
 
   updateRecipe(recipe: IFormValue, id: number): void {
-    const editedRecipe = this.getEditedRecipe(recipe);
+    this.recipes[id] = this.getEditedRecipe(recipe);
 
-    this.recipes[id] = editedRecipe;
-
-    this.changedRecipe.emit(this.getRecipeById(id));
-    this.changeRecipes.emit(this.getAllRecipes());
+    this.changeRecipe$.next(this.recipes[id]);
   }
 
   getIngredientName(key: string, index: number): string {
@@ -121,7 +124,8 @@ export class RecipeService {
       formValue.recipeTitle,
       formValue.recipeDescription,
       formValue.recipeImage,
-      this.mapIngredientsToArray(formValue.recipeIngredients)
+      this.mapIngredientsToArray(formValue.recipeIngredients),
+      formValue.recipeDeleted
     );
   }
 
@@ -157,5 +161,13 @@ export class RecipeService {
     }
 
     return editedIngredients;
+  }
+
+  setRecipeDeleted(id: number): void {
+    const deletedRecipe = this.getRecipeById(id);
+    deletedRecipe.isDeleted = true;
+
+    this.recipes[id] = deletedRecipe;
+    this.changeRecipe$.next(this.recipes[id]);
   }
 }

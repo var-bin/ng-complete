@@ -33,6 +33,7 @@ import { BetterHighlightDirective } from './shared/directives';
 import { DialogService } from './shared/services';
 
 import { AppRoutingModule } from './app-routing.module';
+import { RxjsBasicsComponent } from './rxjs-basics';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { AppRoutingModule } from './app-routing.module';
     BetterHighlightDirective,
     PageNotFoundComponent,
     RecipeItemActionButtonComponent,
-    RecipeItemEditComponent
+    RecipeItemEditComponent,
+    RxjsBasicsComponent
   ],
   imports: [
     BrowserModule,
